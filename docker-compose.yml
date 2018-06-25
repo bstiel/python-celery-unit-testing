@@ -1,0 +1,31 @@
+version: '3.5'
+services:
+  app:
+    build: ./
+    image: &app app
+    restart: "no"
+    command: ["python", "app.py"]
+    env_file: &envfile
+      - env.env
+    depends_on:
+      - broker
+    volumes:
+      - ./app:/app
+    ports:
+      - 5000:5000
+
+  worker:
+    image: *app
+    restart: "no"
+    env_file: *envfile
+    command: ["celery", "worker", "--app=worker.app", "--concurrency=1", "--hostname=worker@%h", "--loglevel=INFO"]
+    volumes:
+      - ./app:/app
+    depends_on:
+      - broker
+
+  broker:
+    image: rabbitmq:3
+    env_file: *envfile
+    ports:
+      - 5672:5672
