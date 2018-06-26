@@ -1,6 +1,6 @@
 # Unit Testing Celery Tasks
 
-This projects contains the source code examples accompanying the blog post: https://python-celery.com/2018/05/01/unit-testing-celery-tasks.
+This projects contains the source code examples accompanying the blog post: https://www.python-celery.com/2018/05/01/unit-testing-celery-tasks.
 
 Docker use is highly recommended.
 
